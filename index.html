@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VirusTotal Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="file"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .results-section {
+            margin-top: 30px;
+        }
+        
+        .circular-score {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#e74c3c 0%, #e74c3c 54%, #ccc 54%, #ccc 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .results-table th,
+        .results-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .results-table th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+        
+        .critical {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .high {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        .medium {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+        
+        .low {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>VirusTotal Scanner</h1>
+
+        <!-- URL Section -->
+        <form action="/check_url" method="POST">
+            <label for="url">Enter URL to Scan:</label>
+            <input type="text" id="url" name="url" placeholder="https://example.com" required>
+            <button type="submit">Scan URL</button>
+        </form>
+
+        <!-- File Upload Section -->
+        <div class="file-section">
+            <form action="/upload_file" method="POST" enctype="multipart/form-data">
+                <label for="file">Upload a File to Scan:</label>
+                <input type="file" id="file" name="file" required>
+                <button type="submit">Upload & Scan</button>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="results">
+            <h2>Scan Results</h2>
+
+            <div class="circular-score">
+                <div class="circle" id="community-score">54</div>
+            </div>
+
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Severity</th>
+                        <th>Rule</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="critical">Critical</td>
+                        <td>Potential Dridex Activity</td>
+                        <td>Detects potential Dridex activity via specific process patterns.</td>
+                    </tr>
+                    <tr>
+                        <td class="high">High</td>
+                        <td>Suspicious Process Masquerading</td>
+                        <td>Detects a suspicious process masquerading as svchost.exe.</td>
+                    </tr>
+                    <tr>
+                        <td class="medium">Medium</td>
+                        <td>System File Execution Location Anomaly</td>
+                        <td>Identifies execution anomalies in system file locations.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
